@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 const fs = require('fs')
 const fileExists = require('file-exists')
-const client = new Discord.Client()
-//const config = require('./config.json')
+const client = new Discord.Client()
+//const config = require('./config.json')
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/peluchebot";
 
@@ -51,6 +51,7 @@ MongoClient.connect(url, function(err, db) {
   dbo.collection("part").find({}).toArray(function(err, result) {
   if (err) throw err;
   console.log(result);
+  var y;
   y=result.length;
   console.log(y);
   for(var i=0;i<y;i++){
@@ -70,6 +71,7 @@ MongoClient.connect(url, function(err, db) {
   dbo.collection("orga").find({}).toArray(function(err, resultbis) {
   if (err) throw err;
   console.log(resultbis);
+  var y;
   y=resultbis.length;
   console.log(y);
   for(var i=0;i<y;i++){
@@ -124,7 +126,7 @@ client.on("ready", function () {
 client.on('message', message => {
 
     if (message.author.bot) return
-    if (message.content.indexOf(config.prefix) !== 0) return
+    if (message.content.indexOf("!") !== 0) return
 
 
 
@@ -135,6 +137,7 @@ client.on('message', message => {
     // !addorga-----------------------------------------------------------------
     if (command == 'addorga'){
       y=orga.length;
+      var mtadd;
       if(orga.length==0){
         orga.push(message.author.username);
         MongoClient.connect(url, function(err, db) {
@@ -191,6 +194,9 @@ client.on('message', message => {
     }
     // !eliminate---------------------------------------------------------------
     if (command == 'eliminate'){
+      var mtsupp;
+      var pos;
+      var temp;
       for(var i=0;i<orga.length;i++){
         if(message.author.username==orga[i]){
           mtsupp=message.mentions.users.last();
@@ -225,7 +231,8 @@ client.on('message', message => {
     }
     // !participate-------------------------------------------------------------
     if (command == 'participate') {
-      auteur = message.author.username;
+      
+      var auteur = message.author.username;
       if(find(auteur)!=-1){
         message.reply('Tu es déjà inscrit!');
         return;
@@ -460,4 +467,4 @@ client.on('message', message => {
         }
   })
 
-  client.login(process.env.BOT_TOKEN)
+  client.login("NDcxMjc3NTI4NTA2Njk1NzIx.Djis8A.SFyj6tZ-lptBu3bd8LLNQmrds9k")
