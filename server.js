@@ -467,4 +467,4 @@ client.on('message', message => {
         }
   })
 
-  client.login("NDcxMjc3NTI4NTA2Njk1NzIx.Djis8A.SFyj6tZ-lptBu3bd8LLNQmrds9k")
+  client.login("")
